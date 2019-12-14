@@ -1,0 +1,109 @@
+body {
+    text-align: center;
+    margin: 50px;
+    min-width: 600px;
+}
+a#gameLink {
+    text-decoration: none;
+    text-align: center;
+    margin: 0 auto;
+    width: 80%;
+    color: black;
+    padding: 10px;
+    border: hotpink solid 2px;
+    display: inline-block;
+}
+#nav {
+    text-decoration: none;
+    text-align: center;
+    background-color: grey;
+    padding: 0;
+    margin: 0;
+    margin-top: -50px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+table#slot_machine {
+    border-spacing: 0;
+    margin: 0 auto;
+}
+tr#board_row0 td, tr#board_row1 td{
+    border-bottom: solid black 2px;
+}
+#info {
+    height: 100px;
+    background-color: blueviolet;
+}
+#bottom_edge {
+    height: 5px;
+    background-color: blueviolet;
+}
+#info_panel {
+    width: 290px;
+    height: 80px;
+    margin: 10px;
+    padding: 5px;
+    background-color: green;
+}
+#control_panel {
+    width: 336px;
+    background-color: blueviolet;
+    margin: 0 auto;
+}
+#edge {
+    width: 5px;
+}
+#rate, #balance {
+    text-align: center;
+    margin-right: auto;
+}
+#rate_label, #balance_label {
+    padding-left:26px;
+    width:125px;
+    text-transform: uppercase;
+    display:inline-block
+}
+input#play {
+    background-color: grey;
+    width: 306px;
+    height: 30px;
+    margin: 10px;
+}
+a#new_game{
+    text-decoration: none;
+    text-align: center;
+    border: blueviolet solid 1px;
+    color: black;
+    padding: 5px;
+    margin-top: 5px;
+    width:326px;
+    text-transform: uppercase;
+    display:inline-block;
+    background-color: cadetblue;
+}
+.roll {
+    width: 100px;
+    height: 100px;
+    background:url('img/roll.png');
+}
+.square {
+    width: 100px;
+    height: 100px;
+}
+#board_row0 #roll {
+    animation:rolling 500ms linear;
+    animation-iteration-count: 2;
+}
+#board_row1 #roll {
+    animation:rolling 500ms linear;
+    animation-iteration-count: 3;
+}
+#board_row2 #roll {
+    animation:rolling 500ms linear;
+    animation-iteration-count: 1;
+}
+@keyframes rolling
+{
+    100% {background-position:0 0;}
+    0% {background-position:0 -700px;}
+}

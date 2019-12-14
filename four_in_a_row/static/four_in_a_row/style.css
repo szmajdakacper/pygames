@@ -1,0 +1,101 @@
+body {
+  text-align: center;
+}
+a#gameLink {
+  text-decoration: none;
+  text-align: center;
+  margin: 0 auto;
+  width: 80%;
+  color: black;
+  padding: 10px;
+  border: hotpink solid 2px;
+  display: inline-block;
+}
+#nav {
+  text-decoration: none;
+  text-align: center;
+  background-color: grey;
+  padding: 0;
+  margin: 0;
+  margin-top: -8px;
+  width: 100%;
+}
+table {
+  width: 500px;
+  margin: 0 auto;
+  text-align: left;
+  margin-bottom: 50px;
+}
+table td {
+  margin: auto;
+  border: 1px solid black;
+}
+
+p {
+  background: white;
+  padding: 20px;
+}
+
+a#reset {
+  border: 1px solid black;
+  background: white;
+  padding: 20px;
+  text-decoration: none;
+}
+
+img#prevTurn5 {
+  animation: row5 1s;
+}
+img#prevTurn4 {
+  animation: row4 1s;
+}
+img#prevTurn3 {
+  animation: row3 1s;
+}
+img#prevTurn2 {
+  animation: row2 1s;
+}
+img#prevTurn1 {
+  animation: row1 1s;
+}
+
+@keyframes row5 {
+  0% {
+    transform: translateY(-400px) scale(1);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+@keyframes row4 {
+  0% {
+    transform: translateY(-330px) scale(1);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+@keyframes row3 {
+  0% {
+    transform: translateY(-270px) scale(1);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+@keyframes row2 {
+  0% {
+    transform: translateY(-200px) scale(1);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+@keyframes row1 {
+  0% {
+    transform: translateY(-130px) scale(1);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}

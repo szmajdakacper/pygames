@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Slot_Machine</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'slot_machine/style.css' %}" />
+    <script type='text/javascript' src="{% static 'slot_machine/script.js' %}"></script>
+</head>
+
+<body>
+    <nav id="nav">
+        <a id="nav" href="/">PyGames</a id="nav">
+    </nav>
+    <table id="slot_machine">
+        <!-- Information panel -->
+        <tr id="info">
+            <td rowspan="5">
+                <div id="edge"></div>
+            </td>
+            <td colspan="3">
+                <div id="info_panel">
+                    <p id="info_text">
+                        {% if messages %}
+                        {% for message in messages %}
+                        {% if message.tags == 'success' %}
+                        <small>{{ message }}</small><br>
+                        {% elif message.tags == 'error' %}
+                        {{ message }}
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </p>
+                </div>
+            </td>
+            <td rowspan="5">
+                <div id="edge"></div>
+            </td>
+        </tr>
+
+        <!-- Board -->
+        {% for row in board %}
+        <tr id="board_row{{ forloop.counter0 }}">
+            {% for square in row %}
+            <td id="roll" class="roll">
+                <div class="square">{{ square }}</div>
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+
+        <tr id="bottom_edge">
+            <td colspan="3"></td>
+        </tr>
+    </table>
+
+    <div id="control_panel">
+        <form action="{% url 'slot_machine:pull' %}" method="post">
+            {% csrf_token %}
+            <label for="rate" id="rate_label">Rate:</label>{{ play_form.rate }}
+            <br>
+            <label for="balance" id="balance_label">Balance:</label>{{ play_form.balance }}
+            <br>
+            <input id="play" type="submit" value="Play">
+        </form>
+    </div>
+    <br>
+    <a id="new_game" href="{% url 'slot_machine:reset' %}">New Game</a>
+</body>
+
+</html>

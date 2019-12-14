@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'hangman/style.css' %}" />
+  <title>Hangman_countries</title>
+</head>
+
+<body>
+  <nav id="nav">
+    <a id="nav" href="/">PyGames</a id="nav">
+  </nav>
+  <h1>{{ request.session.masked_word }}</h1>
+  {% if request.session.chance == 11 %}
+  <h1 style="color: red;">{{ request.session.word }}</h1>
+  {% endif %}
+  {% for letter in request.session.letters %}
+  <a id="btn" href="{% url 'hangman:shot' letter %}">{{ letter }}</a>
+  {% endfor %}
+  <hr />
+  {% with chance=request.session.chance|stringformat:"i" %}
+  {% with img='hangman/img/hangman_'|add:chance|add:'.png' %}
+  <img src="{% static img %}" alt="" />
+  {% endwith %}
+  {% endwith %}
+  <br>
+  <br>
+  <a id="btn" style="width: 100%;" href="{% url 'hangman:reset' %}">New Game</a>
+</body>
+
+</html>

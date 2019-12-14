@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'four_in_a_row/style.css' %}" />
+  <title>FourInARow</title>
+</head>
+
+<body>
+  <nav id="nav">
+    <a id="nav" href="/">PyGames</a id="nav">
+  </nav>
+  <h1>Four In A Row</h1>
+  {% if request.session.win %}
+  <p style="background:{{ request.session.win }};">
+    {{ request.session.win }} wins!!
+  </p>
+  {% endif %}
+
+  <table>
+    <tr>
+      {% for cord, image in request.session.board.items %}
+      <!-- create board after every 7 column -->
+      {% if forloop.counter0|divisibleby:7 %}
+    </tr>
+    <tr>
+      {% endif %}
+      <td>
+        {% with img='four_in_a_row/img/'|add:image|add:'.png' %}
+        <a href="{% url 'four_in_a_row:clicked' cord %}">
+          <!-- Animation -->
+          {% if cord == request.session.prevTurn %}
+          <img id="prevTurn{{cord.1}}" src="{% static img %}" alt="" /></a>
+        {% else %}
+        <img id="" src="{% static img %}" alt="" /></a>
+        {% endif %}
+        {% endwith %}
+      </td>
+
+      {% endfor %}
+    </tr>
+  </table>
+
+  <a id="reset" href="{% url 'four_in_a_row:reset' %}">New Game</a>
+</body>
+
+</html>
