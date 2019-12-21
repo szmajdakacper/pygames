@@ -9,9 +9,9 @@ from .forms import PlayForm
 def play(request):
     board = init_board()
     #set default balance to 1000 points
-    try:
+    if request.session.get('balance'):
         balance = request.session['balance']
-    except KeyError:
+    else:
         balance = 1000
         request.session['balance'] = balance
 

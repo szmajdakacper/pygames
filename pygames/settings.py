@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'pygames.wsgi.application'
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'django_pygames',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'haslo-do-roota',
         'HOST': '',
         'PORT': '3306',
     }

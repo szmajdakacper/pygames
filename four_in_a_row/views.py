@@ -6,9 +6,7 @@ from . import config
 
 def play(request):
     #if it is new game, than board don't exists yet
-    try:
-        request.session['board']
-    except KeyError:
+    if not request.session.get('board'):
         #crate new board
         board = init_board()
         #save board in session
@@ -20,12 +18,12 @@ def play(request):
 
 def clicked(request, cord):
     column = cord[0]
-    try:
-        request.session['win']
-    except KeyError:
+    if request.session.get('win'):
+        return HttpResponseRedirect(reverse_lazy('four_in_a_row:play'))
+    else:
         takeTheLowest(request, column)
-    checkTheResult(request)
-    return HttpResponseRedirect(reverse_lazy('four_in_a_row:play'))
+        checkTheResult(request)
+        return HttpResponseRedirect(reverse_lazy('four_in_a_row:play'))
 
 def reset(request):
     try:
@@ -80,19 +78,19 @@ def checkTheResult(request):
         for x in config.horizontally:
             coordinates = str(x)+str(y)
             if board[coordinates] == "red":
-                red_y += 1
+                red_x += 1
             else:
-                red_y = 0
-            if red_y == 4:
+                red_x = 0
+            if red_x == 4:
                 request.session['win'] = "Red"
             if board[coordinates] == "blue":
-                blue_y += 1
+                blue_x += 1
             else:
-                blue_y = 0
-            if blue_y == 4:
+                blue_x = 0
+            if blue_x == 4:
                 request.session['win'] = "Blue"
-        red_y = 0
-        blue_y = 0
+        red_x = 0
+        blue_x = 0
     #4 in a column
     for x in config.horizontally:
         for y in config.vertically:

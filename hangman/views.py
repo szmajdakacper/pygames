@@ -9,10 +9,9 @@ from .models import Country
 
 def play(request):
     #if it is new game, than variable chance don't exists yet. 
-    try:
-        request.session['chance']
-    except KeyError:
+    if not request.session.get('game'):
         #create variables in session: chance, letters(from A to Z)
+        request.session['game'] = 'on'
         request.session['chance'] = 0
         request.session['letters'] = list(letters)
         #get random country from Database
@@ -21,7 +20,7 @@ def play(request):
         masked_word = maskWord(request, country)
         #save word and maksed_word in session
         request.session['word'] = country
-        request.session['masked_word'] = masked_word  
+        request.session['masked_word'] = masked_word
     return render(request, 'hangman/index.html')
 
 def shot(request, letter):
@@ -58,12 +57,16 @@ def shot(request, letter):
 def reset(request):
     try:
         del request.session['chance']
+        del request.session['game']
     except KeyError:
         pass
     return HttpResponseRedirect(reverse_lazy('hangman:play'))
 
 def getCountry():
-    country_id = random.randint(1, 239)
+    countries_quantity = Country.objects.all().count()
+    if countries_quantity == 0:
+        return "no data"
+    country_id = random.randint(1, countries_quantity)
     country = str(Country.objects.get(pk=country_id))
     country = country.upper()
     return country
