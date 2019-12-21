@@ -34,13 +34,14 @@ def shot(request, letter):
         letters = request.session['letters']
         word = request.session['word']
         #remove selected letter
-        letters.remove(letter)
-        #update letters in session
-        request.session['letters'] = letters   
-        
-        #if selected letter isn't in word
-        if not re.search(letter, word):
-            chance += 1
+        if letter in letters:
+            letters.remove(letter)
+            #update letters in session
+            request.session['letters'] = letters   
+            
+            #if selected letter isn't in word
+            if not re.search(letter, word):
+                chance += 1
 
         #mask left letters
         masked_word = maskWord(request, word)
